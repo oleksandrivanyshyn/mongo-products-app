@@ -27,7 +27,7 @@ app.use('/', authRoutes);
 
 mongodb.connect('mongodb://localhost:27017/shop')
     .then(client => {
-      console.log('Connected!');
+      console.log('Connected to MongoDB');
     })
     .catch(err => {
       console.log(err);
