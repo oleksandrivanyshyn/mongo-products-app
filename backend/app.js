@@ -25,12 +25,4 @@ app.use((req, res, next) => {
 app.use('/products', productRoutes);
 app.use('/', authRoutes);
 
-mongodb.connect('mongodb://localhost:27017/shop')
-    .then(client => {
-      console.log('Connected to MongoDB');
-    })
-    .catch(err => {
-      console.log(err);
-    });
-
 app.listen(3100);
