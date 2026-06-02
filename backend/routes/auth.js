@@ -26,7 +26,7 @@ router.post('/signup', (req, res, next) => {
   // Hash password before storing it in database => Encryption at Rest
   bcrypt
     .hash(pw, 12)
-    .then(hashedPW => {
+    .then((hashedPW) => {
       // Store hashedPW in database
       console.log(hashedPW);
       const token = createToken();
@@ -34,7 +34,7 @@ router.post('/signup', (req, res, next) => {
         .status(201)
         .json({ token: token, user: { email: 'dummy@dummy.com' } });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json({ message: 'Creating the user failed.' });
     });
