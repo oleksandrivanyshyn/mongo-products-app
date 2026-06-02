@@ -7,11 +7,6 @@ class ProductPage extends Component {
   state = { isLoading: true, product: null };
 
   componentDidMount() {
-    this.fetchProductData();
-  }
-
-  fetchProductData = () => {
-    this.setState({ isLoading: true });
     axios
       .get('http://localhost:3100/products/' + this.props.match.params.id)
       .then((productResponse) => {
@@ -24,23 +19,7 @@ class ProductPage extends Component {
           'Loading the product failed. Please try again later',
         );
       });
-  };
-
-  deleteProductHandler = () => {
-    axios
-      .delete('http://localhost:3100/products/' + this.props.match.params.id)
-      .then((response) => {
-        this.setState({ product: null, isLoading: false });
-
-        this.props.history.push('/products');
-      })
-      .catch((err) => {
-        console.log(err);
-        this.props.onError(
-          'Deleting the product failed. Please try again later.',
-        );
-      });
-  };
+  }
 
   render() {
     let content = <p>Is loading...</p>;
@@ -57,10 +36,6 @@ class ProductPage extends Component {
             }}
           />
           <p>{this.state.product.description}</p>
-
-          <button className="btn-danger" onClick={this.deleteProductHandler}>
-            Delete Product
-          </button>
         </main>
       );
     }
